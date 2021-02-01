@@ -1,0 +1,58 @@
+#sidebar
+  position -webkit-sticky
+  position sticky
+  top 2rem
+  padding 3rem 0 0 0
+  max-height 80%
+  // visibility hidden
+
+.sidebar-header
+  margin-bottom .5rem
+  font-weight 500
+  line-height 1.2
+
+  &, & > i
+    font-size 1.25rem
+
+#sidebar
+  max-height 100%
+  overflow-y auto
+  overflow -moz-scrollbars-none
+  -ms-overflow-style none
+
+  ol
+    list-style none
+    padding-inline-start 1rem
+
+  &::-webkit-scrollbar
+    display none
+
+.sidebar-list
+  ol
+    list-style none
+    padding-left 1rem
+  li
+    padding-top 0.2rem
+  a
+    font-size 0.95rem
+
+.sidebar-list-1
+  > li
+    margin-top 0.5rem
+    > a  
+      font-size 1rem
+      font-weight 500
+
+.sidebar-link
+  color var(--text-color)
+
+.sidebar-active-link
+  font-weight bold
+  color var(--link-hover-color)
+
+.sidebar-is-collapsed
+  max-height 0
+
+.sidebar-is-collapsible
+  overflow hidden
+  transition all 300ms ease-in-out

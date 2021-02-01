@@ -8,7 +8,11 @@ page.banner_mask_alpha = theme.post.banner_mask_alpha
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="d-none d-lg-block col-lg-2">
+      <% if(page.show_category){ %>
+        <%- partial('_partial/post-categories') %>
+      <% } %>
+    </div>
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
