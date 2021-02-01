@@ -5,6 +5,25 @@
   padding 3rem 0 0 0
   max-height 80%
 
+.sidebar-body
+  max-height 75vh
+  overflow-y auto
+
+.sidebar-body::-webkit-scrollbar
+  width 2px
+  height 6px
+  
+.sidebar-body::-webkit-scrollbar-track
+  border-radius 3px
+  background rgba(0,0,0,0.06)
+  -webkit-box-shadow inset 0 0 5px rgba(0,0,0,0.08)
+  
+  /* 滚动条滑块 */
+.sidebar-body::-webkit-scrollbar-thumb
+  border-radius 3px
+  background rgba(0,0,0,0.12)
+  -webkit-box-shadow inset 0 0 10px rgba(0,0,0,0.2)
+
 .sidebar-header
   margin-bottom .5rem
   font-weight 500

@@ -12,27 +12,38 @@ categories.data.sort((a,b) => {
   bPosts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
   return aPosts[0].date.format() > bPosts[0].date.format() ? 1 : -1
 })
+
+function isActive(c){
+  c.posts.data.findIndex()
+}
 %>
 
 <div id="sidebar">
   <p class="sidebar-header"><%= cat.name %></p>
-  <ol class="sidebar-list sidebar-list-1">
-  <% categories.forEach( c => { %>
-    <li class="sidebar-list-item"> 
-      <a><%= c.name %></a>
-      <ol class="sidebar-list sidebar-list-2">
-        <% var posts = c.posts.data; 
-           posts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
-        %>
-        <% posts.forEach( p => { %>
-        <li class="sidebar-list-item <%- p.path == page.path ? 'is-active-li' : '' %>" > 
-          <a class="sidebar-link <%- p.path == page.path ? 'sidebar-active-link' : '' %>" href="<%- url_for(p.path) %>">
-            <%= p.title %>
-          </a>
-        </li>
-        <% }) %>
-      </ol>
-    </li>
-  <% }) %>
-  </ol>
+  <div class="sidebar-body" ID="sidebar-body">
+    <ol class="sidebar-list sidebar-list-1">
+    <% categories.forEach( c => { %>
+      <li class="sidebar-list-item"> 
+        <a class="sidebar-title" onclick="
+          (function(){
+            document.querySelector('#sidebar-<%- c._id %>').classList.toggle('sidebar-is-collapsed')
+          })()
+          "><%= c.name %></a>
+        <ol id="sidebar-<%- c._id %>" class="sidebar-list sidebar-list-2 sidebar-is-collapsible 
+            <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : ''  %>">
+          <% var posts = c.posts.data; 
+            posts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
+          %>
+          <% posts.forEach( p => { %>
+          <li class="sidebar-list-item <%- p.path == page.path ? 'is-active-li' : '' %>" > 
+            <a class="sidebar-link <%- p.path == page.path ? 'sidebar-active-link' : '' %>" href="<%- url_for(p.path) %>">
+              <%= p.title %>
+            </a>
+          </li>
+          <% }) %>
+        </ol>
+      </li>
+    <% }) %>
+    </ol>
+  </div>
 </div>
