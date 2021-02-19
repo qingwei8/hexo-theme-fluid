@@ -1,0 +1,65 @@
+<div id="bottom">
+  <div id="bottom-drawer" class="bottom-drawer">
+    <% if(page.show_category){ %>
+      <%- partial('_partial/post-categories') %>
+    <% } %>
+    <div id="toc-mobile">
+      <div class="toc-body" id="toc-body-mobile"></div>
+    </div>
+  </div>
+  <div id="bottom-tab">
+    <a class="sub-menu" onclick="showBottomDrawer('#bottom-drawer .sidebar')">
+      <i class="iconfont"></i> 章节
+    </a>
+    <a class="sub-menu" onclick="showBottomDrawer('#bottom-drawer #toc-mobile')">
+      <i class="iconfont"></i> 目录
+    </a>
+    <a href="#comments" class="sub-menu" onclick="showBottomDrawer('#comments')"> 
+      <i class="iconfont"></i> 评论
+    </a>
+  </div>
+</div>
+
+<script>
+  document.onreadystatechange = function(e) {
+    let drawer = $('#bottom-drawer')
+    if (drawer.height == 0) return
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body-mobile',
+      contentSelector : '.markdown-body',
+      headingSelector : 'h1,h2,h3,h4',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : 20
+    });
+  } 
+  
+  function showBottomDrawer(sel){
+    let drawer = document.querySelector('#bottom-drawer')
+    let s = document.querySelector(sel)
+    
+    drawer.childNodes.forEach((n) => {
+      if(n != s && n.classList) n.classList.remove("active")
+    })
+    s.classList.toggle("active")
+
+    if (sel == "#comments") {
+      drawer.classList.remove("active")
+      return
+    } 
+
+    if (s.classList.contains("active") && !drawer.classList.contains("active")) {
+      drawer.classList.add("active")
+    }
+
+    if (!s.classList.contains("active") && drawer.classList.contains("active")) {
+      drawer.classList.remove("active")
+    }
+  }
+</script>

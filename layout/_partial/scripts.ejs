@@ -64,8 +64,8 @@
 <%- partial('_partial/plugins/analytics.ejs') %>
 
 <script>
-  let sidebarBody =  document.querySelector("#sidebar .sidebar-body")
-  let sidebarActive = document.querySelector("#sidebar .is-active-li")
+  let sidebarBody =  document.querySelector(".sidebar .sidebar-body")
+  let sidebarActive = document.querySelector(".sidebar .is-active-li")
   let bc = sidebarBody.getBoundingClientRect()
   let ac = sidebarActive.getBoundingClientRect()
   let t = ac.y - bc.y - bc.height / 2
