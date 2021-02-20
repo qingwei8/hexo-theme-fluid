@@ -8,13 +8,13 @@
     </div>
   </div>
   <div id="bottom-tab">
-    <a class="sub-menu" onclick="showBottomDrawer('#bottom-drawer .sidebar')">
+    <a class="sub-menu" onclick="showBottomDrawer(this, '#bottom-drawer .sidebar')">
       <i class="iconfont"></i> 章节
     </a>
-    <a class="sub-menu" onclick="showBottomDrawer('#bottom-drawer #toc-mobile')">
+    <a class="sub-menu" onclick="showBottomDrawer(this, '#bottom-drawer #toc-mobile')">
       <i class="iconfont"></i> 目录
     </a>
-    <a href="#comments" class="sub-menu" onclick="showBottomDrawer('#comments')"> 
+    <a href="#comments" class="sub-menu" onclick="showBottomDrawer(this, '#comments')"> 
       <i class="iconfont"></i> 评论
     </a>
   </div>
@@ -40,7 +40,13 @@
     });
   } 
   
-  function showBottomDrawer(sel){
+  function showBottomDrawer(e, sel){
+    let tab = document.querySelector('#bottom-tab')
+    tab.childNodes.forEach((n) => {
+      if(n != e && n.classList) n.classList.remove("active")
+    })
+    if (sel != "#comments") e.classList.toggle("active")
+
     let drawer = document.querySelector('#bottom-drawer')
     let s = document.querySelector(sel)
     

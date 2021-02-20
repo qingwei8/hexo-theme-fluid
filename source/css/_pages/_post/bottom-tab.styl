@@ -24,6 +24,8 @@
   a
     color #333
     font-weight bold
+    &.active
+      color var(--link-hover-color)
 
 #bottom-drawer
   box-shadow 0px -1px 0px 0px #eee
@@ -39,11 +41,13 @@
   #toc-mobile
     display none
     margin-top 10px
+    height 100%
     &.active
       display block !important
 
   .toc-body
     height 100%
+    max-height 100%
 
   ol
     list-style none
