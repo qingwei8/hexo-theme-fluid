@@ -31,6 +31,10 @@ page.banner_mask_alpha = theme.post.banner_mask_alpha
             <div class="markdown-body">
               <%- page.content %>
             </div>
+            <!-- Custom -->            
+            <% if(theme.post.custom.enable && theme.post.custom.content && page.custom !== false) { %>
+                <%- page.custom || theme.post.custom.content %>
+            <% } %>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -100,11 +104,4 @@ page.banner_mask_alpha = theme.post.banner_mask_alpha
   <%- partial('_partial/post-mobile-menu') %>
 </div>
 
-<!-- Custom -->
-<% if(theme.post.custom.enable && theme.post.custom.content && page.custom !== false) { %>
-  <div class="col-lg-7 mx-auto nopadding-x-md">
-    <div class="container custom post-custom mx-auto">
-      <%- page.custom || theme.post.custom.content %>
-    </div>
-  </div>
-<% } %>
+
