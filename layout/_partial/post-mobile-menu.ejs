@@ -23,8 +23,7 @@
 <script>
   document.onreadystatechange = function(e) {
     let drawer = $('#bottom-drawer')
-    if (drawer.height == 0) return
-
+    if (drawer.height() <= 0) return
     window.tocbot.init({
       tocSelector     : '#toc-body-mobile',
       contentSelector : '.markdown-body',
