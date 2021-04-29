@@ -24,13 +24,17 @@ function isActive(c){
     <ol class="sidebar-list sidebar-list-1">
     <% categories.forEach( c => { %>
       <li class="sidebar-list-item"> 
-        <a class="sidebar-title" onclick="
+        <a class="sidebar-title sidebar-title-<%- c._id %>
+           <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : 'sidebar-title-collapsed'  %>" 
+          onclick="
           (function(){
+            document.querySelector('.sidebar-title-<%- c._id %>').classList.toggle('sidebar-title-collapsed')
             document.querySelector('#sidebar-<%- c._id %>').classList.toggle('sidebar-is-collapsed')
           })()
-          "><%= c.name %></a>
-        <ol id="sidebar-<%- c._id %>" class="sidebar-list sidebar-list-2 sidebar-is-collapsible 
-            <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : ''  %>">
+          "><%= c.name %>(<%= c.posts.length %>)</a>
+        <ol id="sidebar-<%- c._id %>" 
+            class="sidebar-list sidebar-list-2 sidebar-is-collapsible
+            <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : 'sidebar-is-collapsed'  %>">
           <% var posts = c.posts.data; 
             posts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
           %>

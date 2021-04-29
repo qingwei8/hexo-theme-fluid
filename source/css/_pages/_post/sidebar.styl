@@ -64,9 +64,24 @@
   font-weight bold
   color var(--link-hover-color)
 
-.sidebar-is-collapsed
-  max-height 0
 
-.sidebar-is-collapsible
-  overflow hidden
-  transition all 300ms ease-in-out
+
+.sidebar-list
+  .sidebar-is-collapsible
+    overflow hidden
+    transition: 0.5s;
+
+  .sidebar-is-collapsed
+    height 0
+
+
+.sidebar-title::after {
+  content: '▼';
+  display: inline-block;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+.sidebar-title-collapsed::after {
+  transform: rotate(90deg);
+}
