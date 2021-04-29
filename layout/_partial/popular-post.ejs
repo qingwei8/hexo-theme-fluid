@@ -1,0 +1,18 @@
+<%
+  let posts = popular_posts_json({ 
+    maxCount: 5 , 
+    ulClass: 'popular-posts' , 
+    PPMixingRate: 0.5, 
+    isImage: false,
+  } , page )
+%>
+
+<h2 id="猜你喜欢">猜你喜欢</h2>
+<ul>
+  <% posts.json.forEach(p => {%>
+    <li>
+      <a href="<%- p.path %>" rel="recommend"><%- p.title %></a>
+      <span><%- p.excerpt %></span>
+    </li>
+  <% }) %>
+</ul>
