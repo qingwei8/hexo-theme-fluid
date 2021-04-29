@@ -25,15 +25,11 @@ function isActive(c){
     <% categories.forEach( c => { %>
       <li class="sidebar-list-item"> 
         <a class="sidebar-title sidebar-title-<%- c._id %>
-           <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : 'sidebar-title-collapsed'  %>" 
-          onclick="
-          (function(){
-            document.querySelector('.sidebar-title-<%- c._id %>').classList.toggle('sidebar-title-collapsed')
-            document.querySelector('#sidebar-<%- c._id %>').classList.toggle('sidebar-is-collapsed')
-          })()
-          "><%= c.name %>(<%= c.posts.length %>)</a>
-        <ol id="sidebar-<%- c._id %>" 
-            class="sidebar-list sidebar-list-2 sidebar-is-collapsible
+           <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : 'sidebar-title-collapsed'  %>"
+          data-cid="<%- c._id %>"
+          onclick="switchSideBar('<%- c._id %>')"><%= c.name %>(<%= c.posts.length %>)</a>
+        <ol data-cid="<%- c._id %>"
+            class="sidebar-list sidebar-list-2 sidebar-is-collapsible sidebar-<%- c._id %>
             <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : 'sidebar-is-collapsed'  %>">
           <% var posts = c.posts.data; 
             posts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
@@ -51,3 +47,9 @@ function isActive(c){
     </ol>
   </div>
 </div>
+<script>
+  function switchSideBar(id){
+    $('.sidebar-title-'+id).toggleClass('sidebar-title-collapsed')
+    $('.sidebar-'+id).toggleClass('sidebar-is-collapsed')
+  }
+</script>

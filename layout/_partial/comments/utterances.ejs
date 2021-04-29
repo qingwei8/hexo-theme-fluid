@@ -20,6 +20,7 @@
       <% } %>
       s.setAttribute('theme', schema);
       s.setAttribute('crossorigin', '<%= theme.utterances.crossorigin %>');
+      s.setAttribute("async","async")
       document.getElementById('comments').appendChild(s);
     // })
   </script>
