@@ -4,13 +4,12 @@ var a = page.categories.data.filter(c => c.parent == cat._id)
 // console.log(Object.keys(a[0].posts.data[0]), a[0].posts.data[0].date)
 
 var categories = site.categories.find({parent: cat._id})
-categories.data.sort((a,b) => { return a.name > b.name ? 1 : -1 })
 categories.data.sort((a,b) => {
-  let aPosts = a.posts.data
-  let bPosts = b.posts.data
-  aPosts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
-  bPosts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
-  return aPosts[0].date.format() > bPosts[0].date.format() ? 1 : -1
+  let conf = config["categories_sort"][cat.name]
+  if (conf) {
+    return conf[a.name] - conf[b.name]
+  }
+  return a.name > b.name ? 1 : -1
 })
 
 function isActive(c){
@@ -31,8 +30,15 @@ function isActive(c){
         <ol data-cid="<%- c._id %>"
             class="sidebar-list sidebar-list-2 sidebar-is-collapsible sidebar-<%- c._id %>
             <%- c.posts.data.findIndex(a => a.path == page.path) > -1 ? '' : 'sidebar-is-collapsed'  %>">
-          <% var posts = c.posts.data; 
-            posts.sort((a,b)=> a.date.format() > b.date.format() ? 1 : -1)
+          <% var posts = c.posts.data;
+            posts.sort((a,b)=> {
+              let asort = a.title.match(/^\d+/)
+              let bsort = b.title.match(/^\d+/)
+              if ( asort && bsort ) {
+                return asort[0] - bsort[0]
+              }
+              return a.date.format() > b.date.format() ? 1 : -1
+            })
           %>
           <% posts.forEach( p => { %>
           <li class="sidebar-list-item <%- p.path == page.path ? 'is-active-li' : '' %>" > 
